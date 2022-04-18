@@ -27,17 +27,29 @@ import com.example.demo.Service.Implementation.EmployeeServiceImpl;
 		@Autowired
 		EmployeeServiceImpl serviceImpl;
 		
-		
+		//Post mapping
 		@PostMapping( path="/employee")
 		public Employee addEmployee(@RequestBody Employee employee) {
 			return serviceImpl.addEmployee(employee);
 		}
 		
+		//Get mapping
 		@GetMapping(path= "/getemployee")
 		private List<Employee> getEmployees() {
 			return serviceImpl.getEmployees();
 		}
+		@GetMapping( path="/salary")
+		public List<Employee> function(){
+			return serviceImpl.descendingSalary();
+		}
 		
+		@GetMapping(path="/employee/sort")
+		public List<Employee> function2(){
+			return serviceImpl.getEmployeesBySorting();
+		}
+		
+		
+		//Put mapping
 		@PutMapping( path="/employee/{Eid}")
 		private Employee updateEmployee(@PathVariable Integer Eid, @RequestBody Employee employee) {
 			return serviceImpl.updateEmployee(Eid, employee);
@@ -49,16 +61,7 @@ import com.example.demo.Service.Implementation.EmployeeServiceImpl;
 			return serviceImpl.updateEmployees( employee);
 		}
 		
-		
-		@GetMapping( path="/salary")
-		public List<Employee> function(){
-			return serviceImpl.descendingSalary();
-		}
-		
-		@GetMapping(path="/employee/sort")
-		public List<Employee> function2(){
-			return serviceImpl.getEmployeesBySorting();
-		}
+		//delete mapping
 		
 		@DeleteMapping(path="/delete/{Eid}")
 		public String deleteEmployee(@PathVariable int Eid)
